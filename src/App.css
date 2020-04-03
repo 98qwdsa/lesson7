@@ -1,0 +1,21 @@
+.calculator {
+  width: 50%;
+  margin-left: 30%;
+}
+
+.art {
+
+  float: left;
+}
+
+.button {
+  margin-left: 450px;
+}
+
+.match {
+  float: right;
+}
+
+.p1 {
+  text-align: center;
+}
