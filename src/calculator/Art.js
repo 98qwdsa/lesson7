@@ -1,16 +1,16 @@
 import React from "react";
-import Calculator from "../Calculator/Calculator";
-import withAverage from "../../HOC/withAverage/withAverage";
-import { NameContext } from "../../context/profieContext";
+import Calculator from "./Calculator";
+import withAverage from "../common/withAverage";
+import {NameContext} from "../common/profieContext";
 
 class Art extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      extras: 5
-    };
-  }
-  static subject = { code: "art", score: 0 };
+    constructor(props){
+        super(props)
+        this.state = {
+            extras: 5             
+        }
+    }
+    static subject = { code: "art", score: 0 };
   handelExtras = e => {
     this.props.onExtrasChange(e);
     e.persist();
