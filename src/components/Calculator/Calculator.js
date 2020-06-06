@@ -1,5 +1,6 @@
 import React from "react";
 import "./Calculator.css";
+import { useState,useEffect } from "react";
 
 //如果能确定其他地方会使用该组件可以申明为一个 class 然后export出去
 export class Numbers extends React.Component {
@@ -22,19 +23,30 @@ export class Numbers extends React.Component {
   }
 }
 
-export default class Calculator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.errorMsg = props.errorMsg || "请输入正确的算术式!";
-    this.state = {
-      evalStr: "",
-      result: ""
-    };
-  }
+export default function Calculator(props){
+  let errorMsg = props.errorMsg || "请输入正确的算术式!";
+  let [evalStr,setEvalStr] = useState('');
+  let [result,setResult] = useState('');
+  useEffect(()=>{
+    console.log("result",result);
+    document.title = result;
+    return(()=>{
+      document.title = "";
+    })
+  },[result])
+  
+  // constructor(props) {
+  //   super(props);
+  //   this.errorMsg = props.errorMsg || "请输入正确的算术式!";
+  //   this.state = {
+  //     evalStr: "",
+  //     result: ""
+  //   };
+  // }
   // 组件内部的数据最好初始化在改class属性上
-  error = "";
+  let error = "";
   //定义计算按钮的初始数据
-  nums = [
+  let nums = [
     {
       label: "0"
     },
@@ -67,7 +79,7 @@ export default class Calculator extends React.Component {
     }
   ];
   // 定义算术方法的 初始数据
-  funs = [
+  let funs = [
     {
       label: "+"
     },
@@ -88,7 +100,7 @@ export default class Calculator extends React.Component {
     }
   ];
   // 内部的无状态组件方法推荐使用UI前缀区分一下
-  UIActions(props) {
+  function UIActions(props) {
     return (
       <div className="action_warp">
         {/* 根据props传入的数据生成按钮 */}
@@ -106,83 +118,92 @@ export default class Calculator extends React.Component {
     );
   }
   //算式方法组件点击后处理方法
-  actionsClick = e => {
+  function actionsClick(e){
     // 如果有错误信息，只能点击C按钮
     // 如果点击C按钮清除 错误信息,算式，计算结果
-    let evalStr = this.state.evalStr,
-      result;
+    // let evalStr = this.state.evalStr,
+    let tempEvalStr = evalStr;
+    let tempResult = result;
     if ("C" === e) {
-      this.error = "";
-      evalStr = "";
-      result = "";
+      // this.error = "";
+      error = "";
+      tempEvalStr = "";
+      tempResult = "";
     } else {
-      if ("" !== this.error) {
+      if ("" !== error) {
         return;
       }
       // 如果点击的=,计算算式。 如果错误显示错误提示
       if ("=" === e) {
         try {
-          result = eval(this.state.evalStr);
+          tempResult = eval(evalStr);
         } catch (e) {
-          result = "";
-          this.error = this.errorMsg;
+          tempResult = "";
+          error = errorMsg;
         }
-        if (false === /^\d+(\.\d+)?$/.test(result)) {
-          result = "";
-          this.error = this.errorMsg;
+        if (false === /^\d+(\.\d+)?$/.test(tempResult)) {
+          tempResult = "";
+          error = errorMsg;
         } else {
-          if (this.props.cb) {
-            this.props.cb(result);
+          if (props.cb) {
+            props.cb(tempResult);
           }
         }
       } else {
         // 如果点击是一般计算方法符号，在当前算术式后面累加
-        evalStr = this.state.evalStr + e;
+        tempEvalStr = evalStr + e;
       }
     }
 
     // 同一个逻辑片段不管是逻辑还是肉眼上都要尽可能的减少setState的调用。
-    this.setState({
-      evalStr,
-      result
-    });
+    // this.setState({
+    //   evalStr,
+    //   result
+    // });
+    setEvalStr(tempEvalStr);
+    setResult(tempResult);
   };
   //数字按钮点击后的处理方法
-  numClick = e => {
-    if ("" === this.error) {
+  function numClick (e){
+    if ("" === error) {
       //直接在当前算式后面累加输入的数字
-      this.setState({
-        evalStr: this.state.evalStr + e
-      });
+      // this.setState({
+      //   evalStr: this.state.evalStr + e
+      // });
+     
+      
+      setEvalStr(evalStr+e);
     }
   };
   //手动修改算式的处理方法
-  inputOnChange = e => {
-    if ("" === this.error) {
+  function inputOnChange (e){
+    if ("" === error) {
       e.persist();
       //算式显示区域可以手动修改算式
-      this.setState({
-        evalStr: e.target.value
-      });
+      // this.setState({
+      //   evalStr: e.target.value
+      // });
+      
+      setEvalStr(e.target.value)
     }
   };
-  render() {
+ 
     return (
       <div className="warp">
-        <input value={this.state.evalStr} onChange={this.inputOnChange} />
+        <input value={evalStr} onChange={inputOnChange} />
         {/* 显示计算结果和错误提示 */}
-        <div className={this.error ? "result error" : "result"}>
-          {this.state.result === "" ? this.error : this.state.result}
+        <div className={error ? "result error" : "result"}>
+          {result === "" ? error : result}
         </div>
 
         {/* 引入方法按钮组件 */}
-        <this.UIActions click={this.actionsClick} funs={this.funs} />
+        <UIActions click={actionsClick} funs={funs} />
 
         {/* 引入数字按钮组件 */}
-        <Numbers click={this.numClick} nums={this.nums} />
+        <Numbers click={numClick} nums={nums} />
       </div>
     );
-  }
+  
 }
 //变量申明在class外部在文件加载的时候变量就会初始化一直占用一定空间，且不会随组件初始化而初始化，不会随组件销毁而销毁。
 //变量申明在class外部可以在需要的时候export出去给其他组件使用。

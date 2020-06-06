@@ -1,13 +1,26 @@
-import React from "react";
+import React ,{useContext}from "react";
 import Calculator from "../Calculator/Calculator";
 import withAverage from "../../HOC/withAverage/withAverage";
 import { EmailContext } from "../../context/profieContext";
+import useAverage from '../../hooks/useAverage'
 
-class Mathe extends React.Component {
-  static subject = { code: "mathe", score: 0 };
-  static contextType = EmailContext;
-  render() {
-  return <><span>{this.context}</span><Calculator cb={this.props._editScore} />{this.props.children}</>;
-  }
+function Mathe (props){
+  // static subject = { code: "mathe", score: 0 };
+  let callback = useAverage({ code: "mathe", score: 0 });
+  // static contextType = EmailContext;
+  const context = useContext(EmailContext);
+ 
+  return (
+  <>
+    <div>
+      {props.title}
+      <p>{context}</p>
+      <Calculator cb={callback._editScore} />{props.children}
+    </div>
+    
+    
+  </>
+    );
+  
 }
-export default withAverage(Mathe, Mathe.subject);
+export default Mathe;

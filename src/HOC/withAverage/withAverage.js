@@ -1,8 +1,10 @@
 import React from "react";
 import demoData from "../../demoData";
 // import hoistNonReactStatic from 'hoist-non-react-statics';
-export default function withAverage(Warp, subject) {
+export default function withAverage(props,Warp, subject) {
   //Warp.prototype.componentWillUnmount = function() {};
+  console.log("pass subject",subject);
+  
   class Average extends React.Component {
     componentDidMount() {
       demoData._addSubject(subject);
@@ -17,13 +19,13 @@ export default function withAverage(Warp, subject) {
       demoData._editScore({ ...subject, ...{ score } });
     }
     render() {
-      const { title, ...passThroughProps } = this.props;
+      const { title, ...passThroughProps } = props;
       return (
         <>
         <p>
           {title}
         </p>
-        <Warp
+        <div
           {...passThroughProps}
           _editScore={this._editScore}
         />
@@ -31,7 +33,7 @@ export default function withAverage(Warp, subject) {
       );
     }
   };
-  Average.subject = Warp.subject
+  Average.subject = subject
   //hoistNonReactStatic(Average, Warp);
   return Average;
 }
