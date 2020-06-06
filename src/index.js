@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+// import Calculator from './components/Calculator/Calculator'
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
