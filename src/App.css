@@ -1,0 +1,30 @@
+.content {
+    padding-top: 6.25rem;
+    text-align: center;
+    margin: auto;
+}
+
+.components{
+    display:flex;
+    justify-content: center;
+}
+.component {
+    width: 18.25rem;
+    text-align: center;
+    margin-left: 1.25rem;
+    box-sizing: border-box;
+}
+
+.head {
+    text-align: center;
+}
+
+.operator-content {
+    width: 18.75rem;
+
+}
+
+.num-content {
+    width: 18.75rem;
+
+}

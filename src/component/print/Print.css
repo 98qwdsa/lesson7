@@ -1,0 +1,10 @@
+
+
+.input-error {
+    color: red;
+    background-color: #fff;
+    border-color: #fff;
+    line-height: 1.875rem;
+    width: 18.25rem;
+    height: 1.875rem;
+}

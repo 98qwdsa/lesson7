@@ -7,7 +7,9 @@ const DataSource = {
       _TotalScore += e.score;
     });
     this._Average = (_TotalScore / this._TotalSubject.length).toFixed(2);
-    this.aerageChangeCb && this.aerageChangeCb(this._Average);
+    console.log(_TotalScore)
+    console.log(this._TotalSubject.length)
+    this.averageChangeCb && this.averageChangeCb(this._Average);
   },
   _addSubject(subject) {
     this._TotalSubject.push(subject);
@@ -23,6 +25,7 @@ const DataSource = {
   _editScore(subject) {
     this._TotalSubject = this._TotalSubject.map(e => {
       if (e.code === subject.code) {
+        console.log(subject)
         return subject;
       }
       return { ...e };
@@ -30,7 +33,7 @@ const DataSource = {
     this._setAerage();
     this.subjectChangeCb && this.subjectChangeCb(this._TotalSubject);
   },
-  aerageChangeCb: null,
+  averageChangeCb: null,
   subjectChangeCb: null
 };
 
