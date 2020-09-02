@@ -7,8 +7,6 @@ const DataSource = {
       _TotalScore += e.score;
     });
     this._Average = (_TotalScore / this._TotalSubject.length).toFixed(2);
-    console.log(_TotalScore)
-    console.log(this._TotalSubject.length)
     this.averageChangeCb && this.averageChangeCb(this._Average);
   },
   _addSubject(subject) {

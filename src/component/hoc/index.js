@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import MathScore from './MathScore';
 import dataDemo from '../../demoData'
 import ArtScore from './ArtScore'
 import profile, { NameContext, EmailContext } from "../../context/fileContext";
+import Math from "./MathScore"
 import { Button } from 'antd'
+
 
 
 
@@ -20,7 +21,6 @@ import { Button } from 'antd'
 // );
 
 class Index extends Component {
-
 
 
     constructor(props) {
@@ -128,7 +128,8 @@ class Index extends Component {
                                     changeName: this.handelContextChange
                                 }}
                             >
-                                {this.state.showMath && <MathScore
+                                {this.state.showMath && <Math
+                                    title="请输入数学成绩"
                                     onExtrasChange={this.handelExtras}
                                     extrasElm={(extras, handelExtras) => {
                                         this.extras.math = extras;
@@ -158,6 +159,7 @@ class Index extends Component {
                                 }}
                             >
                                 {this.state.showArt && <ArtScore
+                                    title="请输入美术成绩"
                                     onExtrasChange={this.handelExtras}
                                     extrasElm={(extras, handelExtras) => {
                                         this.extras.art = extras;
