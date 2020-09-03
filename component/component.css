@@ -1,0 +1,36 @@
+.container{
+    width: 800px;
+    height: 550px;
+    background-color: antiquewhite;
+    margin: auto;
+    align-content: center;
+    padding-top: 40px;
+}
+
+.context{
+    text-align: center;
+    font-size: 1.2em;
+    font-family: serif;
+}
+
+.art{
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 3rem;
+}
+
+.float-left{
+    float: left;
+}
+
+.mathe{
+    margin: auto;
+    float: left;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 12rem;
+    
+}
