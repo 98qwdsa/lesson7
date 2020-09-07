@@ -1,0 +1,59 @@
+#button{
+
+      
+    
+    width: 240px;
+    padding-left: 850px;
+    height: 240px;
+
+
+
+    
+}
+
+#d1,#d2,#d3,#d4,#d5,#d6,#d7,#d8,#d9,#dp{
+  
+background-color:#03F;
+width:80px;
+height:60px;
+float:center;
+font-size:10px;
+}
+#d0{
+    background-color:#03F;
+width:160px;
+height:60px;
+float:center;
+font-size:10px;
+}
+#dAC,#da,#db,#dc,#dd,#de,#df,#dg{
+
+
+    background-color:#fb1d04;
+width:80px;
+height:60px;
+float:center;
+font-size:10px;
+
+}
+#result{
+
+
+width:315px;
+
+height:45px;
+
+background-color:#CCC;
+
+margin:auto	;
+
+text-align:right;
+
+font-size:20px
+}
+#root
+{
+
+
+text-align:center
+}
